@@ -40,8 +40,7 @@ jobs:
           https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/CustomizationSelect.sh)" \
           dexcom_upload_readings \
           future_carbs_4h \
-          no_auth \
-          now_line \
+          override_sens \
           testflight_expiration_warning
 
           # the final customization listed above CANNOT have a continuation character "\"
