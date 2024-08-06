@@ -263,12 +263,12 @@ jobs:
           # Submodule Loop patches:
           # Template for customizing submodule Loop (changes Loop app name to "CustomLoop")
           # Remove the "#" sign from the beginning of the line below to activate:
-          #curl https://github.com/loopnlearn/Loop/commit/d206432b024279ef710df462b20bd464cd9682d4.patch | git apply --directory=Loop -v --whitespace=fix
+          curl https://github.com/sasaelmore/Loop/commit/053213a336b7fda5b8ebc0e8db2f452c6ab3028d.patch | git apply -v --directory=Loop
 
           # Submodule LoopKit patches:
           # General template for customizing submodule LoopKit 
           # Copy url from a GitHub commit or pull request and insert below, and remove the "#" sign from the beginning of the line to activate:
-          #curl url_to_github_commit.patch | git apply --directory=LoopKit -v --whitespace=fix
+          curl https://github.com/sasaelmore/LoopKit/commit/505d54fb339376daf77486bf999c1ab2b4bc9ba9.patch | git apply -v --directory=LoopKit
 
           # Submodule xxxxx patches:
 
@@ -276,7 +276,24 @@ jobs:
           # and make sure to specify the submodule by setting "--directory=(submodule_name)".
           # Several patches may be added per submodule.
           # Adding comments (#) may be useful to easily tell the individual patches apart.
+          # The lines below add the customizations listed using the CustomizationSelect script
+          # The "\" is a continuation character 
+          #   the line following a "\" should not be blank
+          /bin/bash -c "$(curl -fsSL \
+          https://raw.githubusercontent.com/loopandlearn/lnl-scripts/main/CustomizationSelect.sh)" \
+          dexcom_upload_readings \
+          future_carbs_4h \
+          low_carb_limit \
+          now_line \
+          watch_title \
+          meal_week \
+          2002 \
+          basal_lock \
+          live_activity
 
+          # the final customization listed above CANNOT have a continuation character
+          # more customizations can be pasted after this line
+     
       # Patch Fastlane Match to not print tables
       - name: Patch Match Tables
         run: |
