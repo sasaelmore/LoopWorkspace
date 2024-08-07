@@ -254,8 +254,12 @@ jobs:
       - name: Customize Loop
         run: |
 
-          # For each patch, edit comment line (keep the #) then update curl (and remove the #)
-
+          # LoopWorkspace patches
+          # -applies any patches located in the LoopWorkspace/patches/ directory
+          if $(ls ./patches/* &> /dev/null); then
+          git apply ./patches/* --allow-empty -v --whitespace=fix
+          fi
+          
           # Submodule Loop patches:
           # Template for customizing submodule Loop (changes Loop app name to "CustomLoop")
           # Remove the "#" sign from the beginning of the line below to activate:
@@ -272,7 +276,6 @@ jobs:
           # and make sure to specify the submodule by setting "--directory=(submodule_name)".
           # Several patches may be added per submodule.
           # Adding comments (#) may be useful to easily tell the individual patches apart.
-         
           # The lines below add the customizations listed using the CustomizationSelect script
           # The "\" is a continuation character 
           #   the line following a "\" should not be blank
